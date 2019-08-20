@@ -1,0 +1,11 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.12
+    working_directory: /go/src/github.com/trivago/grafana-datasource-to-yaml
+    steps:
+      - run: sudo apt update
+      - checkout
+      - run: go test
+
