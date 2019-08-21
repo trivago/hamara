@@ -22,8 +22,8 @@ var exportCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(exportCmd)
 
-	exportCmd.PersistentFlags().StringVarP(&host, "host", "H", "", "Grafana host")
-	exportCmd.PersistentFlags().StringVarP(&token, "token", "t", "", "API key with Admin rights from Grafana")
-	exportCmd.MarkPersistentFlagRequired("host")
-	exportCmd.MarkPersistentFlagRequired("token")
+	exportCmd.Flags().StringVarP(&host, "host", "H", "", "Grafana host")
+	exportCmd.Flags().StringVarP(&token, "token", "t", "", "API key with Admin rights from Grafana")
+	exportCmd.MarkFlagRequired("host")
+	exportCmd.MarkFlagRequired("token")
 }
