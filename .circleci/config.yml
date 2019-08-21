@@ -7,5 +7,4 @@ jobs:
     steps:
       - run: sudo apt update
       - checkout
-      - run: go test
-
+      - run: go test ./...
