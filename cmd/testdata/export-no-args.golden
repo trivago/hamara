@@ -1,0 +1,9 @@
+Error: required flag(s) "host", "token" not set
+Usage:
+  grafana-datasource-to-yaml export [flags]
+
+Flags:
+  -h, --help           help for export
+  -H, --host string    Grafana host
+  -t, --token string   API key with Admin rights from Grafana
+

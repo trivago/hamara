@@ -7,21 +7,24 @@ import (
 	"testing"
 )
 
-func TestRootCmd(t *testing.T) {
+func TestExportCmd(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    []string
 		fixture string
 	}{
-		{"no arguments", []string{}, "no-args.golden"},
+		{"no arguments", []string{}, "export-no-args.golden"},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 
 			actual := new(bytes.Buffer)
+			args := []string{"export"}
+			args = append(args, tt.args...)
+
 			rootCmd.SetOutput(actual)
-			rootCmd.SetArgs(tt.args)
+			rootCmd.SetArgs(args)
 			rootCmd.Execute()
 
 			expected, err := ioutil.ReadFile("testdata/" + tt.fixture)
