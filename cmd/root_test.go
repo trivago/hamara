@@ -3,8 +3,9 @@ package cmd
 import (
 	"bytes"
 	"io/ioutil"
-	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestRootCmd(t *testing.T) {
@@ -18,6 +19,7 @@ func TestRootCmd(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			assert := assert.New(t)
 
 			actual := new(bytes.Buffer)
 			rootCmd.SetOutput(actual)
@@ -29,9 +31,7 @@ func TestRootCmd(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			if !reflect.DeepEqual(actual.String(), string(expected)) {
-				t.Fatalf("actual = %s, expected = %s", actual, expected)
-			}
+			assert.Equal(actual.String(), string(expected))
 		})
 	}
 
