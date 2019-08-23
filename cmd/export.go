@@ -2,28 +2,37 @@ package cmd
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/spf13/cobra"
 )
 
-var host string
-var token string
-
-// exportCmd represents the export command
-var exportCmd = &cobra.Command{
-	Use:   "export",
-	Short: "Export datasources",
-	Long:  `Retrieve datasources from existing Grafana and export it into a YAML provisioning file`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(host, token)
-	},
+type exportCmd struct {
+	host  string
+	token string
+	out   io.Writer
 }
 
-func init() {
-	rootCmd.AddCommand(exportCmd)
+func newExportCmd(out io.Writer) *cobra.Command {
+	ec := &exportCmd{out: out}
 
-	exportCmd.Flags().StringVarP(&host, "host", "H", "", "Grafana host")
-	exportCmd.Flags().StringVarP(&token, "token", "t", "", "API key with Admin rights from Grafana")
-	exportCmd.MarkFlagRequired("host")
-	exportCmd.MarkFlagRequired("token")
+	cmd := &cobra.Command{
+		Use:   "export",
+		Short: "Export datasources",
+		Long:  `Retrieve datasources from existing Grafana and export it into a YAML provisioning file`,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return ec.run()
+		},
+	}
+
+	cmd.Flags().StringVarP(&ec.host, "host", "H", "", "Grafana host")
+	cmd.Flags().StringVarP(&ec.token, "token", "t", "", "API key with Admin rights from Grafana")
+	cmd.MarkFlagRequired("host")
+	cmd.MarkFlagRequired("token")
+	return cmd
+}
+
+func (c *exportCmd) run() error {
+	fmt.Fprintf(c.out, "Exporting from %s\n", c.host)
+	return nil
 }
