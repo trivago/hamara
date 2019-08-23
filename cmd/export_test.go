@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/trivago/grafana-datasource-to-yaml/pkg/services"
 )
 
 func TestExportCmd(t *testing.T) {
@@ -25,7 +26,7 @@ func TestExportCmd(t *testing.T) {
 			assert := assert.New(t)
 
 			actual := new(bytes.Buffer)
-			exportCmd := newExportCmd(actual)
+			exportCmd := newExportCmd(actual, services.NewGrafanaExporter())
 			exportCmd.SetArgs(tt.args)
 			exportCmd.Execute()
 

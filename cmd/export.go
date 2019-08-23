@@ -1,20 +1,21 @@
 package cmd
 
 import (
-	"fmt"
 	"io"
 
 	"github.com/spf13/cobra"
+	"github.com/trivago/grafana-datasource-to-yaml/pkg/services"
 )
 
 type exportCmd struct {
-	host  string
-	token string
-	out   io.Writer
+	host     string
+	token    string
+	out      io.Writer
+	exporter services.ExporterService
 }
 
-func newExportCmd(out io.Writer) *cobra.Command {
-	ec := &exportCmd{out: out}
+func newExportCmd(out io.Writer, exporter services.ExporterService) *cobra.Command {
+	ec := &exportCmd{out: out, exporter: exporter}
 
 	cmd := &cobra.Command{
 		Use:   "export",
@@ -33,6 +34,5 @@ func newExportCmd(out io.Writer) *cobra.Command {
 }
 
 func (c *exportCmd) run() error {
-	fmt.Fprintf(c.out, "Exporting from %s\n", c.host)
-	return nil
+	return c.exporter.Export(c.host, c.token)
 }
