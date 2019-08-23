@@ -22,6 +22,7 @@ func TestRootCmd(t *testing.T) {
 			assert := assert.New(t)
 
 			actual := new(bytes.Buffer)
+			rootCmd := newRootCmd(tt.args)
 			rootCmd.SetOutput(actual)
 			rootCmd.SetArgs(tt.args)
 			rootCmd.Execute()
