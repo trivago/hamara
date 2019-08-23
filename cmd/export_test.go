@@ -1,10 +1,11 @@
 package cmd
 
 import (
-	"bytes"
+	"io/ioutil"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 	"github.com/trivago/grafana-datasource-to-yaml/pkg/services"
 )
 
@@ -25,8 +26,7 @@ func TestExportCmd(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			assert := assert.New(t)
 
-			actual := new(bytes.Buffer)
-			exportCmd := newExportCmd(actual, services.NewGrafanaExporter())
+			exportCmd := newExportCmd(ioutil.Discard, services.NewGrafanaExporter())
 			exportCmd.SetArgs(tt.args)
 			exportCmd.Execute()
 
@@ -34,4 +34,24 @@ func TestExportCmd(t *testing.T) {
 			assert.Equal(tt.token, exportCmd.Flag("token").Value.String())
 		})
 	}
+}
+
+type grafanaExporterMock struct {
+	mock.Mock
+}
+
+func (m *grafanaExporterMock) Export(host string, token string) error {
+	args := m.Called(host, token)
+	return args.Error(0)
+}
+
+func TestExporterFunction(t *testing.T) {
+	grafanaExporter := new(grafanaExporterMock)
+	grafanaExporter.On("Export", "http://localhost:3000", "123").Return(nil)
+
+	exportCmd := newExportCmd(ioutil.Discard, grafanaExporter)
+	exportCmd.SetArgs([]string{"--host=http://localhost:3000", "--token=123"})
+	exportCmd.Execute()
+
+	grafanaExporter.AssertExpectations(t)
 }
