@@ -46,12 +46,12 @@ func (m *grafanaExporterMock) Export(host string, token string) error {
 }
 
 func TestExporterFunction(t *testing.T) {
-	grafanaExporter := new(grafanaExporterMock)
-	grafanaExporter.On("Export", "http://localhost:3000", "123").Return(nil)
+	exporterMock := new(grafanaExporterMock)
+	exporterMock.On("Export", "http://localhost:3000", "123").Return(nil)
 
-	exportCmd := newExportCmd(ioutil.Discard, grafanaExporter)
+	exportCmd := newExportCmd(ioutil.Discard, exporterMock)
 	exportCmd.SetArgs([]string{"--host=http://localhost:3000", "--token=123"})
 	exportCmd.Execute()
 
-	grafanaExporter.AssertExpectations(t)
+	exporterMock.AssertExpectations(t)
 }
