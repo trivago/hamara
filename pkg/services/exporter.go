@@ -11,8 +11,8 @@ type ExporterService interface {
 type GrafanaExporter struct{}
 
 // Export will retrieve the datasources from Grafana and convert it to YAML provisioning file
-func (grafana GrafanaExporter) Export(host string, token string) error {
-	fmt.Printf("Exporting Grafana %s %s", host, token)
+func (grafana *GrafanaExporter) Export(host string, token string) error {
+	fmt.Printf("Exporting Grafana %s %s\n", host, token)
 	return nil
 }
 
