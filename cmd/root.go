@@ -21,6 +21,8 @@ func newRootCmd(args []string) *cobra.Command {
 		newExportCmd(out),
 	)
 
+	cmd.PersistentFlags().Parse(args)
+
 	return cmd
 }
 
