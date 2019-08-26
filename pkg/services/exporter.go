@@ -47,38 +47,39 @@ type DataSourceProvisioning struct {
 
 // Export will retrieve the datasources from Grafana and convert it to YAML provisioning file
 func (grafana *GrafanaExporter) Export(host string, token string) error {
+	var (
+		yamlBytes []byte
+		body      []byte
+		ds        []*DataSource
+		resp      *http.Response
+	)
 
 	apiPartURL := "/api/datasources"
-	url1 := fmt.Sprintf("%s%s", host, apiPartURL)
+	url := fmt.Sprintf("%s%s", host, apiPartURL)
 
-	req, err := http.NewRequest("GET", url1, nil)
+	req, err := http.NewRequest("GET", url, nil)
 	key := fmt.Sprintf("Bearer %s", token)
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", key)
 
 	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
+	if resp, err = client.Do(req); err != nil {
+		fmt.Fprint(os.Stderr, fmt.Sprintf("%s\n", err))
 	}
+
+	// closing the response body manually
 	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
 		log.Fatalf("Failed with status code %d", resp.StatusCode)
 	}
 
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatal(err)
+	if body, err = ioutil.ReadAll(resp.Body); err != nil {
+		fmt.Fprint(os.Stderr, fmt.Sprintf("%s\n", err))
 	}
 
-	// TODO: proceed with converion only if authorization was OK
-
-	var yamlBytes []byte
-	var ds []*DataSource
-
-	// deserialize the content of JSON file (the bytes) into a struct
+	// deserialize the content of JSON into a struct
 	if err = json.Unmarshal(body, &ds); err != nil {
 		fmt.Fprint(os.Stderr, fmt.Sprintf("%s\n", err))
 	}
@@ -91,11 +92,6 @@ func (grafana *GrafanaExporter) Export(host string, token string) error {
 	}
 
 	fmt.Println(string(yamlBytes))
-
-	// // write to file
-	// if _, err = file.Write(yamlBytes); err != nil {
-	// 	fmt.Fprint(os.Stderr, fmt.Sprintf("%s\n", err))
-	// }
 
 	return nil
 }
