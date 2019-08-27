@@ -1,6 +1,7 @@
 package grafana
 
 type DataSource struct {
+	Id                int64                  `json:"id" yaml:"-"`
 	OrgId             int64                  `json:"orgId" yaml:"orgId,omitempty"`
 	Version           int                    `json:"version" yaml:"version,omitempty"`
 	Name              string                 `json:"name" yaml:"name"`
@@ -16,6 +17,7 @@ type DataSource struct {
 	WithCredentials   bool                   `json:"withCredentials" yaml:"withCredentials,omitempty"`
 	IsDefault         bool                   `json:"isDefault" yaml:"isDefault,omitempty"`
 	JsonData          map[string]interface{} `json:"jsonData" yaml:"jsonData,omitempty"`
+	SecureJsonFields  map[string]bool        `json:"secureJsonFields" yaml:"-"`
 	SecureJsonData    map[string]string      `json:"secureJsonData" yaml:"secureJsonData,omitempty"`
 	Editable          bool                   `json:"editable" yaml:"editable,omitempty"`
 }

@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"os"
@@ -38,11 +40,12 @@ func newExportCmd(out io.Writer, converter services.ConverterService) *cobra.Com
 
 func (c *exportCmd) run() error {
 	client := grafana.NewRestClient(c.host, c.key)
-	raw, err := client.GetAllDatasources()
+	datasources, err := client.GetAllDatasources()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	return c.converter.Convert(raw, c.out)
+	dsBytes, _ := json.Marshal(datasources)
+	return c.converter.Convert(bytes.NewReader(dsBytes), c.out)
 }
