@@ -20,6 +20,7 @@ type DataSource struct {
 	SecureJsonFields  map[string]bool        `json:"secureJsonFields" yaml:"-"`
 	SecureJsonData    map[string]string      `json:"secureJsonData" yaml:"secureJsonData,omitempty"`
 	Editable          bool                   `json:"editable" yaml:"editable,omitempty"`
+	ReadOnly          bool                   `json:"readOnly" yaml:"-"`
 }
 
 type DataSourceProvisioning struct {
