@@ -30,8 +30,7 @@ type DataSource struct {
 }
 
 type DataSourceProvisioning struct {
-	ApiVersion int64
-
+	ApiVersion  int64         `yaml:"apiVersion"`
 	Datasources []*DataSource `yaml:"datasources"`
 }
 
