@@ -11,14 +11,14 @@ import (
 )
 
 type exportCmd struct {
-	host     string
-	key      string
-	out      io.Writer
-	exporter services.ExporterService
+	host      string
+	key       string
+	out       io.Writer
+	converter services.ConverterService
 }
 
-func newExportCmd(out io.Writer, exporter services.ExporterService) *cobra.Command {
-	ec := &exportCmd{out: out, exporter: exporter}
+func newExportCmd(out io.Writer, converter services.ConverterService) *cobra.Command {
+	ec := &exportCmd{out: out, converter: converter}
 
 	cmd := &cobra.Command{
 		Use:   "export",
@@ -44,5 +44,5 @@ func (c *exportCmd) run() error {
 		os.Exit(1)
 	}
 
-	return c.exporter.Export(raw, c.out)
+	return c.converter.Convert(raw, c.out)
 }

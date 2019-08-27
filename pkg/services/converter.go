@@ -9,16 +9,13 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-// ExporterService interface to export datasources
-type ExporterService interface {
-	Export(io.Reader, io.Writer) error
+type ConverterService interface {
+	Convert(io.Reader, io.Writer) error
 }
 
-// GrafanaExporter implementation to export datasources
-type GrafanaExporter struct{}
+type GrafanaConverter struct{}
 
-// Export will retrieve the datasources from Grafana and convert it to YAML provisioning file
-func (ge *GrafanaExporter) Export(reader io.Reader, writer io.Writer) error {
+func (grafanaConverter *GrafanaConverter) Convert(reader io.Reader, writer io.Writer) error {
 	var (
 		yamlBytes []byte
 		content   []byte
@@ -44,7 +41,6 @@ func (ge *GrafanaExporter) Export(reader io.Reader, writer io.Writer) error {
 	return nil
 }
 
-// NewGrafanaExporter initialize the GrafanaExporter struct
-func NewGrafanaExporter() *GrafanaExporter {
-	return &GrafanaExporter{}
+func NewGrafanaConverter() *GrafanaConverter {
+	return &GrafanaConverter{}
 }

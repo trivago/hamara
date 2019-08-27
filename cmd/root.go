@@ -19,7 +19,7 @@ func newRootCmd(args []string) *cobra.Command {
 	out := cmd.OutOrStdout()
 
 	cmd.AddCommand(
-		newExportCmd(out, services.NewGrafanaExporter()),
+		newExportCmd(out, services.NewGrafanaConverter()),
 	)
 
 	cmd.PersistentFlags().Parse(args)
