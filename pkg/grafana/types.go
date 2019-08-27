@@ -1,5 +1,11 @@
 package grafana
 
+import (
+	"io"
+
+	"gopkg.in/yaml.v2"
+)
+
 type DataSource struct {
 	Id                int64                  `json:"id" yaml:"-"`
 	OrgId             int64                  `json:"orgId" yaml:"orgId,omitempty"`
@@ -27,4 +33,21 @@ type DataSourceProvisioning struct {
 	ApiVersion int64
 
 	Datasources []*DataSource `yaml:"datasources"`
+}
+
+func (dsp *DataSourceProvisioning) WriteTo(out io.Writer) error {
+	var (
+		yamlBytes []byte
+		err       error
+	)
+
+	if yamlBytes, err = yaml.Marshal(dsp); err != nil {
+		return err
+	}
+
+	if _, err = out.Write(yamlBytes); err != nil {
+		return err
+	}
+
+	return nil
 }

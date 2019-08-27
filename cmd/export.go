@@ -1,26 +1,22 @@
 package cmd
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"io"
 	"os"
 
 	"github.com/spf13/cobra"
 	"github.com/trivago/grafana-datasource-to-yaml/pkg/grafana"
-	"github.com/trivago/grafana-datasource-to-yaml/pkg/services"
 )
 
 type exportCmd struct {
-	host      string
-	key       string
-	out       io.Writer
-	converter services.ConverterService
+	host string
+	key  string
+	out  io.Writer
 }
 
-func newExportCmd(out io.Writer, converter services.ConverterService) *cobra.Command {
-	ec := &exportCmd{out: out, converter: converter}
+func newExportCmd(out io.Writer) *cobra.Command {
+	ec := &exportCmd{out: out}
 
 	cmd := &cobra.Command{
 		Use:   "export",
@@ -46,6 +42,6 @@ func (c *exportCmd) run() error {
 		os.Exit(1)
 	}
 
-	dsBytes, _ := json.Marshal(datasources)
-	return c.converter.Convert(bytes.NewReader(dsBytes), c.out)
+	dsProv := grafana.DataSourceProvisioning{ApiVersion: 1, Datasources: datasources}
+	return dsProv.WriteTo(c.out)
 }

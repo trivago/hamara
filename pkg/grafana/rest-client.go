@@ -81,6 +81,10 @@ func (r *RestClient) GetAllDatasources() ([]*DataSource, error) {
 				ds.SecureJsonData[key] = fmt.Sprintf("$%s_%s", ds.Name, key)
 			}
 		}
+
+		if ds.Access == "" {
+			ds.Access = "proxy"
+		}
 	}
 
 	return datasources, err
