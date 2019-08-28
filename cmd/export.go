@@ -10,13 +10,14 @@ import (
 )
 
 type exportCmd struct {
-	host string
-	key  string
-	out  io.Writer
+	host     string
+	key      string
+	out      io.Writer
+	clientFn grafana.NewClientFn
 }
 
-func newExportCmd(out io.Writer) *cobra.Command {
-	ec := &exportCmd{out: out}
+func newExportCmd(out io.Writer, fn grafana.NewClientFn) *cobra.Command {
+	ec := &exportCmd{out: out, clientFn: fn}
 
 	cmd := &cobra.Command{
 		Use:   "export",
@@ -35,7 +36,7 @@ func newExportCmd(out io.Writer) *cobra.Command {
 }
 
 func (c *exportCmd) run() error {
-	client := grafana.NewRestClient(c.host, c.key)
+	client, err := c.clientFn(grafana.ClientConfig{Host: c.host, Key: c.key})
 	datasources, err := client.GetAllDatasources()
 	if err != nil {
 		fmt.Println(err)

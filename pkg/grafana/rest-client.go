@@ -16,10 +16,10 @@ type RestClient struct {
 	client  *http.Client
 }
 
-func NewRestClient(host string, key string) *RestClient {
-	baseURL, _ := url.Parse(host)
-	key = fmt.Sprintf("Bearer %s", key)
-	return &RestClient{baseURL: baseURL.String(), key: key, client: http.DefaultClient}
+func NewRestClientFn(config ClientConfig) (Client, error) {
+	baseURL, _ := url.Parse(config.Host)
+	key := fmt.Sprintf("Bearer %s", config.Key)
+	return &RestClient{baseURL: baseURL.String(), key: key, client: http.DefaultClient}, nil
 }
 
 func (r *RestClient) Get(query string, params url.Values) ([]byte, int, error) {

@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/trivago/grafana-datasource-to-yaml/pkg/grafana"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -18,7 +19,7 @@ func newRootCmd(args []string) *cobra.Command {
 	out := cmd.OutOrStdout()
 
 	cmd.AddCommand(
-		newExportCmd(out),
+		newExportCmd(out, grafana.NewRestClientFn),
 	)
 
 	cmd.PersistentFlags().Parse(args)
