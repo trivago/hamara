@@ -57,7 +57,7 @@ func (r *RestClient) GetAllDatasources() ([]*DataSource, error) {
 		return nil, err
 	}
 
-	if code != 200 {
+	if code != http.StatusOK {
 		return nil, fmt.Errorf("HTTP error %d", code)
 	}
 
@@ -101,7 +101,7 @@ func (r *RestClient) GetDatasource(id int64) (DataSource, error) {
 	if raw, code, err = r.Get(fmt.Sprintf("api/datasources/%d", id), nil); err != nil {
 		return ds, err
 	}
-	if code != 200 {
+	if code != http.StatusOK {
 		return ds, fmt.Errorf("HTTP error %d", code)
 	}
 
