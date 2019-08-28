@@ -8,6 +8,9 @@ import (
 	"net/http"
 	"net/url"
 	"path"
+	"strings"
+
+	"github.com/gosimple/slug"
 )
 
 type RestClient struct {
@@ -65,6 +68,7 @@ func (r *RestClient) GetAllDatasources() ([]*DataSource, error) {
 		return nil, err
 	}
 
+	existedEnv := make(map[string]bool)
 	for idx, ds := range datasources {
 		var newDs DataSource
 		if newDs, err = r.GetDatasource(ds.Id); err != nil {
@@ -78,7 +82,14 @@ func (r *RestClient) GetAllDatasources() ([]*DataSource, error) {
 		ds.SecureJsonData = make(map[string]string)
 		for key, value := range ds.SecureJsonFields {
 			if value {
-				ds.SecureJsonData[key] = fmt.Sprintf("$%s_%s", ds.Name, key)
+				sanitized := slug.Make(fmt.Sprintf("$%s_%s", ds.Name, key))
+				placeholder := strings.ToUpper(sanitized)
+				if existedEnv[placeholder] {
+					// duplicated env existed
+					return nil, fmt.Errorf("Duplicated ENV variable: `%s`. Rename `%s` datasource", placeholder, ds.Name)
+				}
+				existedEnv[placeholder] = true
+				ds.SecureJsonData[key] = placeholder
 			}
 		}
 
