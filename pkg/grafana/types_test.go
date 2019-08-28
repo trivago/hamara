@@ -21,8 +21,8 @@ func TestWriteTo(t *testing.T) {
 		},
 	}
 	dsp := &grafana.DataSourceProvisioning{ApiVersion: 1, Datasources: datasources}
-	output := new(bytes.Buffer)
-	dsp.WriteTo(output)
-	expected, _ := ioutil.ReadFile("testdata/raw-datasources.yaml")
-	assert.Equal(output.String(), string(expected))
+	actual := new(bytes.Buffer)
+	dsp.WriteTo(actual)
+	expected, _ := ioutil.ReadFile("testdata/datasources.golden.yaml")
+	assert.Equal(string(expected), actual.String())
 }

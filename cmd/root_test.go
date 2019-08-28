@@ -33,7 +33,7 @@ func TestRootCmd(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			assert.Equal(actual.String(), string(expected))
+			assert.Equal(string(expected), actual.String())
 		})
 	}
 

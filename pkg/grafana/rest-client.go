@@ -82,8 +82,8 @@ func (r *RestClient) GetAllDatasources() ([]*DataSource, error) {
 		ds.SecureJsonData = make(map[string]string)
 		for key, value := range ds.SecureJsonFields {
 			if value {
-				sanitized := slug.Make(fmt.Sprintf("$%s_%s", ds.Name, key))
-				placeholder := strings.ToUpper(sanitized)
+				sanitized := slug.Make(fmt.Sprintf("%s_%s", ds.Name, key))
+				placeholder := strings.ToUpper("$" + sanitized)
 				if existedEnv[placeholder] {
 					// duplicated env existed
 					return nil, fmt.Errorf("Duplicated ENV variable: `%s`. Rename `%s` datasource", placeholder, ds.Name)
