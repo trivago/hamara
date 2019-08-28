@@ -5,11 +5,10 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/trivago/grafana-datasource-to-yaml/pkg/services"
+	"github.com/trivago/grafana-datasource-to-yaml/pkg/grafana"
 )
 
-// rootCmd represents the base command when called without any subcommands
-func newRootCmd(args []string) *cobra.Command {
+func NewRootCmd(args []string) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "grafana-datasource-to-yaml",
 		Short: "Exporter of grafana datasources to YAML",
@@ -19,7 +18,7 @@ func newRootCmd(args []string) *cobra.Command {
 	out := cmd.OutOrStdout()
 
 	cmd.AddCommand(
-		newExportCmd(out, services.NewGrafanaExporter()),
+		NewExportCmd(out, grafana.NewRestClientFn),
 	)
 
 	cmd.PersistentFlags().Parse(args)
@@ -30,7 +29,7 @@ func newRootCmd(args []string) *cobra.Command {
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-	if err := newRootCmd(os.Args[1:]).Execute(); err != nil {
+	if err := NewRootCmd(os.Args[1:]).Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}

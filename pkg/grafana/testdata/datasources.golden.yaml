@@ -1,0 +1,9 @@
+apiVersion: 1
+datasources:
+- name: test-db
+  type: influxdb
+  access: proxy
+  jsonData:
+    key: value
+  secureJsonData:
+    password: test

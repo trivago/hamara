@@ -1,0 +1,20 @@
+[
+   {
+      "access": "proxy",
+      "basicAuth": false,
+      "database": "telegraf",
+      "id": 1,
+      "isDefault": false,
+      "jsonData": {
+         "timeInterval": "10s"
+      },
+      "name": "gdev-influxdb-telegraf",
+      "orgId": 1,
+      "password": "",
+      "readOnly": true,
+      "type": "influxdb",
+      "typeLogoUrl": "public/app/plugins/datasource/influxdb/img/influxdb_logo.svg",
+      "url": "http://localhost:8086",
+      "user": "grafana"
+   }
+]

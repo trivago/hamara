@@ -1,21 +1,23 @@
 package cmd
 
 import (
+	"fmt"
 	"io"
+	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/trivago/grafana-datasource-to-yaml/pkg/services"
+	"github.com/trivago/grafana-datasource-to-yaml/pkg/grafana"
 )
 
 type exportCmd struct {
 	host     string
-	token    string
+	key      string
 	out      io.Writer
-	exporter services.ExporterService
+	clientFn grafana.NewClientFn
 }
 
-func newExportCmd(out io.Writer, exporter services.ExporterService) *cobra.Command {
-	ec := &exportCmd{out: out, exporter: exporter}
+func NewExportCmd(out io.Writer, fn grafana.NewClientFn) *cobra.Command {
+	ec := &exportCmd{out: out, clientFn: fn}
 
 	cmd := &cobra.Command{
 		Use:   "export",
@@ -27,12 +29,20 @@ func newExportCmd(out io.Writer, exporter services.ExporterService) *cobra.Comma
 	}
 
 	cmd.Flags().StringVarP(&ec.host, "host", "H", "", "Grafana host")
-	cmd.Flags().StringVarP(&ec.token, "token", "t", "", "API key with Admin rights from Grafana")
+	cmd.Flags().StringVarP(&ec.key, "key", "k", "", "API key with Admin rights from Grafana")
 	cmd.MarkFlagRequired("host")
-	cmd.MarkFlagRequired("token")
+	cmd.MarkFlagRequired("key")
 	return cmd
 }
 
 func (c *exportCmd) run() error {
-	return c.exporter.Export(c.host, c.token)
+	client, err := c.clientFn(grafana.ClientConfig{Host: c.host, Key: c.key})
+	datasources, err := client.GetAllDatasources()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	dsProv := grafana.DataSourceProvisioning{ApiVersion: 1, Datasources: datasources}
+	return dsProv.WriteTo(c.out)
 }
