@@ -1,4 +1,4 @@
-package cmd
+package cmd_test
 
 import (
 	"bytes"
@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/trivago/grafana-datasource-to-yaml/cmd"
 )
 
 func TestRootCmd(t *testing.T) {
@@ -22,7 +23,7 @@ func TestRootCmd(t *testing.T) {
 			assert := assert.New(t)
 
 			actual := new(bytes.Buffer)
-			rootCmd := newRootCmd(tt.args)
+			rootCmd := cmd.NewRootCmd(tt.args)
 			rootCmd.SetOutput(actual)
 			rootCmd.SetArgs(tt.args)
 			rootCmd.Execute()

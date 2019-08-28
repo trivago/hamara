@@ -16,7 +16,7 @@ type exportCmd struct {
 	clientFn grafana.NewClientFn
 }
 
-func newExportCmd(out io.Writer, fn grafana.NewClientFn) *cobra.Command {
+func NewExportCmd(out io.Writer, fn grafana.NewClientFn) *cobra.Command {
 	ec := &exportCmd{out: out, clientFn: fn}
 
 	cmd := &cobra.Command{
