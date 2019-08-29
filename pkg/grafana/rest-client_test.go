@@ -51,7 +51,7 @@ func TestGetAllDatasources(t *testing.T) {
 	assert.Equal(1, len(datasources))
 	actualDatasource := datasources[0]
 	assert.Equal(1, len(actualDatasource.SecureJsonData))
-	assert.Equal("$GDEV-INFLUXDB-TELEGRAF_PASSWORD", actualDatasource.SecureJsonData["password"])
+	assert.Equal("$GDEV_INFLUXDB_TELEGRAF_PASSWORD", actualDatasource.SecureJsonData["password"])
 }
 
 func TestIncompleteHost(t *testing.T) {

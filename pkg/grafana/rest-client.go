@@ -8,9 +8,9 @@ import (
 	"net/http"
 	"net/url"
 	"path"
-	"strings"
 
 	"github.com/gosimple/slug"
+	"github.com/iancoleman/strcase"
 )
 
 type RestClient struct {
@@ -87,7 +87,7 @@ func (r *RestClient) GetAllDatasources() ([]*DataSource, error) {
 		for key, value := range ds.SecureJsonFields {
 			if value {
 				sanitized := slug.Make(fmt.Sprintf("%s_%s", ds.Name, key))
-				placeholder := strings.ToUpper("$" + sanitized)
+				placeholder := strcase.ToScreamingSnake("$" + sanitized)
 				if existedEnv[placeholder] {
 					// duplicated env existed
 					return nil, fmt.Errorf("Duplicated ENV variable: `%s`. Rename `%s` datasource", placeholder, ds.Name)
