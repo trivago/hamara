@@ -21,6 +21,9 @@ type RestClient struct {
 
 func NewRestClientFn(config ClientConfig) (Client, error) {
 	baseURL, _ := url.Parse(config.Host)
+	if baseURL.Host == "" {
+		baseURL, _ = url.Parse("http://" + config.Host)
+	}
 	key := fmt.Sprintf("Bearer %s", config.Key)
 	return &RestClient{baseURL: baseURL.String(), key: key, client: http.DefaultClient}, nil
 }
