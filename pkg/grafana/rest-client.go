@@ -59,7 +59,8 @@ func (r *RestClient) GetAllDatasources() ([]*DataSource, error) {
 		err         error
 	)
 
-	if raw, code, err = r.Get("api/datasources", nil); err != nil {
+	datasourcesPath := "/api/datasources"
+	if raw, code, err = r.Get(datasourcesPath, nil); err != nil {
 		return nil, err
 	}
 
@@ -68,7 +69,7 @@ func (r *RestClient) GetAllDatasources() ([]*DataSource, error) {
 	}
 
 	if err = json.Unmarshal(raw, &datasources); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Failed to parse JSON data from %s%s", r.baseURL, datasourcesPath)
 	}
 
 	existedEnv := make(map[string]bool)
@@ -112,13 +113,16 @@ func (r *RestClient) GetDatasource(id int64) (DataSource, error) {
 		err  error
 	)
 
-	if raw, code, err = r.Get(fmt.Sprintf("api/datasources/%d", id), nil); err != nil {
+	datasourcePath := fmt.Sprintf("/api/datasources/%d", id)
+	if raw, code, err = r.Get(datasourcePath, nil); err != nil {
 		return ds, err
 	}
 	if code != http.StatusOK {
 		return ds, fmt.Errorf("HTTP error %d", code)
 	}
+	if err = json.Unmarshal(raw, &ds); err != nil {
+		return ds, fmt.Errorf("Failed to parse JSON data from %s%s", r.baseURL, datasourcePath)
+	}
 
-	json.Unmarshal(raw, &ds)
 	return ds, err
 }

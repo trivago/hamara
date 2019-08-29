@@ -71,3 +71,16 @@ func TestIncompleteHost(t *testing.T) {
 	assert.Equal(nil, err)
 	assert.Equal([]*grafana.DataSource{}, datasources)
 }
+
+func TestInvalidJSON(t *testing.T) {
+	assert := assert.New(t)
+	defer gock.Off()
+	gock.New("http://localhost:3000").
+		Get("/api/datasources").
+		Reply(200).
+		JSON("<invalid json format>")
+
+	client, err := grafana.NewRestClientFn(grafana.ClientConfig{Host: "http://localhost:3000", Key: "123"})
+	_, err = client.GetAllDatasources()
+	assert.EqualError(err, "Failed to parse JSON data from http://localhost:3000/api/datasources")
+}
