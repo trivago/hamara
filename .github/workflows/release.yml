@@ -1,7 +1,7 @@
 on: release
-name: Build
+name: Release
 jobs:
-  build:
+  release:
     name: release linux/amd64
     runs-on: ubuntu-latest
     steps:
