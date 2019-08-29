@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"github.com/trivago/grafana-datasource-to-yaml/cmd"
-	"github.com/trivago/grafana-datasource-to-yaml/pkg/grafana"
+	"github.com/trivago/hamara/cmd"
+	"github.com/trivago/hamara/pkg/grafana"
 )
 
 type grafanaRestClientMock struct {

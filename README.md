@@ -3,14 +3,14 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/trivago/grafana-datasource-to-yaml/actions">
-    <img alt="Build Status" src="https://github.com/trivago/grafana-datasource-to-yaml/workflows/Go/badge.svg" />
+  <a href="https://github.com/trivago/hamara/actions">
+    <img alt="Build Status" src="https://github.com/trivago/hamara/workflows/Go/badge.svg" />
   </a>
-  <a href="https://codecov.io/gh/trivago/grafana-datasource-to-yaml">
-    <img alt="Coverage Status" src="https://codecov.io/gh/trivago/grafana-datasource-to-yaml/branch/master/graph/badge.svg" />
+  <a href="https://codecov.io/gh/trivago/hamara">
+    <img alt="Coverage Status" src="https://codecov.io/gh/trivago/hamara/branch/master/graph/badge.svg" />
   </a>
-  <a href="https://goreportcard.com/report/github.com/trivago/grafana-datasource-to-yaml">
-    <img alt="Report Card" src="https://goreportcard.com/badge/github.com/trivago/grafana-datasource-to-yaml" />
+  <a href="https://goreportcard.com/report/github.com/trivago/hamara">
+    <img alt="Report Card" src="https://goreportcard.com/badge/github.com/trivago/hamara" />
   </a>
 </p>
 
@@ -23,7 +23,7 @@
 Retrieve datasources from existing Grafana and export it into a YAML provisioning file
 
 Usage:
-  grafana-datasource-to-yaml export [flags]
+  hamara export [flags]
 
 Flags:
   -h, --help          help for export
@@ -36,22 +36,22 @@ Flags:
 
 ```
 export GRAFANA_API_KEY=<your API key here>
-grafana-datasource-to-yaml export --host=localhost:3000 --key=$GRAFANA_API_KEY > datasources.yaml
+hamara export --host=localhost:3000 --key=$GRAFANA_API_KEY > datasources.yaml
 cat datasources.yaml
 ```
 
 **Installation Options**
 ---
 
-1. Download the `grafana-datasource-to-yaml` binary from Releases tab.
+1. Download the `hamara` binary from Releases tab.
 
 2. Install with `go get` (Installed Go required)
-    + `$ go get -u github.com/trivago/grafana-datasource-to-yaml`
-    + `$ grafana-datasource-to-yaml`
+    + `$ go get -u github.com/trivago/hamara`
+    + `$ hamara`
 
 **How to Contribute**
 ---
 
-1. Clone repo and create a new branch: `$ git checkout https://github.com/trivago/grafana-datasource-to-yaml -b name_for_new_branch`.
+1. Clone repo and create a new branch: `$ git checkout https://github.com/trivago/hamara -b name_for_new_branch`.
 2. Make changes and test
 3. Submit Pull Request with comprehensive description of changes

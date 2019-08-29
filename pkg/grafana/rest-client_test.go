@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/trivago/grafana-datasource-to-yaml/pkg/grafana"
+	"github.com/trivago/hamara/pkg/grafana"
 	"gopkg.in/h2non/gock.v1"
 )
 

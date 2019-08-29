@@ -5,12 +5,12 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/trivago/grafana-datasource-to-yaml/pkg/grafana"
+	"github.com/trivago/hamara/pkg/grafana"
 )
 
 func NewRootCmd(args []string) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "grafana-datasource-to-yaml",
+		Use:   "hamara",
 		Short: "Exporter of grafana datasources to YAML",
 		Long:  `A tool for export datasources from the existing Grafana DB into a YAML provisioning file`,
 	}

@@ -1,4 +1,4 @@
-module github.com/trivago/grafana-datasource-to-yaml
+module github.com/trivago/hamara
 
 go 1.12
 

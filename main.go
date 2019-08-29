@@ -1,6 +1,6 @@
 package main
 
-import "github.com/trivago/grafana-datasource-to-yaml/cmd"
+import "github.com/trivago/hamara/cmd"
 
 func main() {
 	cmd.Execute()

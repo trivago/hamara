@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/trivago/grafana-datasource-to-yaml/pkg/grafana"
+	"github.com/trivago/hamara/pkg/grafana"
 )
 
 type exportCmd struct {

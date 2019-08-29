@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/trivago/grafana-datasource-to-yaml/cmd"
+	"github.com/trivago/hamara/cmd"
 )
 
 func TestRootCmd(t *testing.T) {

@@ -1,13 +1,13 @@
 A tool for export datasources from the existing Grafana DB into a YAML provisioning file
 
 Usage:
-  grafana-datasource-to-yaml [command]
+  hamara [command]
 
 Available Commands:
   export      Export datasources
   help        Help about any command
 
 Flags:
-  -h, --help   help for grafana-datasource-to-yaml
+  -h, --help   help for hamara
 
-Use "grafana-datasource-to-yaml [command] --help" for more information about a command.
+Use "hamara [command] --help" for more information about a command.
