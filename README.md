@@ -1,4 +1,6 @@
-<h2 align="center">grafana-datasource-to-yaml</h2>
+<p align="center">
+  <img alt="Logo" src="https://drive.google.com/uc?export=view&id=1ezQnuq5VN1pjwx1mdTFAI6RX3ooXqsWY" height="150">
+</p>
 
 <p align="center">
   <a href="https://github.com/trivago/grafana-datasource-to-yaml/actions">
@@ -12,7 +14,7 @@
   </a>
 </p>
 
-`name` ................
+`hamara` is a tool to export datasources from the existing Grafana DB into a YAML provisioning file
 
 **Usage**
 ---
