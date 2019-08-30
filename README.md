@@ -7,10 +7,10 @@
     <img alt="Build Status" src="https://github.com/trivago/hamara/workflows/Go/badge.svg" />
   </a>
   <a href="https://codecov.io/gh/trivago/hamara">
-    <img alt="Coverage Status" src="https://codecov.io/gh/trivago/hamara/branch/master/graph/badge.svg" />
+    <img alt="Codecov branch" src="https://img.shields.io/codecov/c/github/trivago/hamara/master?color=codecov&label=codecov&logo=codecov&logoColor=codecov" />
   </a>
   <a href="https://goreportcard.com/report/github.com/trivago/hamara">
-    <img alt="Report Card" src="https://goreportcard.com/badge/github.com/trivago/hamara" />
+    <img alt="Report Card" src="https://goreportcard.com/badge/github.com/trivago/hamara?style=flat" />
   </a>
 </p>
 
