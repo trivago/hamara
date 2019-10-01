@@ -24,7 +24,7 @@ clean:
 
 .PHONY: run # Run the generated binary for the current platform
 run:
-	$(GOBUILD) -o $(BINARY_NAME) -v ./...
+	$(GOBUILD) -o $(BINARY_NAME) -v
 	./$(BINARY_NAME)
 
 .PHONY: deps # Generate list of targets with descriptions
