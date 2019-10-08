@@ -74,13 +74,13 @@ func (r *RestClient) GetAllDatasources() ([]*DataSource, error) {
 
 	existedEnv := make(map[string]bool)
 	for idx, ds := range datasources {
-		var newDs DataSource
-		if newDs, err = r.GetDatasource(ds.Id); err != nil {
+		newDs, err := r.getDatasource(ds.Id)
+		if err != nil {
 			return nil, err
 		}
 
 		// assign the current datasource with the new datasource with json data field
-		ds = &newDs
+		ds = newDs
 		datasources[idx] = ds
 
 		ds.SecureJsonData = make(map[string]string)
@@ -105,23 +105,21 @@ func (r *RestClient) GetAllDatasources() ([]*DataSource, error) {
 	return datasources, err
 }
 
-func (r *RestClient) GetDatasource(id int64) (DataSource, error) {
-	var (
-		raw  []byte
-		ds   DataSource
-		code int
-		err  error
-	)
-
+func (r *RestClient) getDatasource(id int64) (*DataSource, error) {
 	datasourcePath := fmt.Sprintf("/api/datasources/%d", id)
-	if raw, code, err = r.Get(datasourcePath, nil); err != nil {
-		return ds, err
+	raw, code, err := r.Get(datasourcePath, nil)
+
+	if err != nil {
+		return nil, err
 	}
+
 	if code != http.StatusOK {
-		return ds, fmt.Errorf("HTTP error %d", code)
+		return nil, fmt.Errorf("HTTP error %d", code)
 	}
+
+	ds := &DataSource{}
 	if err = json.Unmarshal(raw, &ds); err != nil {
-		return ds, fmt.Errorf("Failed to parse JSON data from %s%s", r.baseURL, datasourcePath)
+		return nil, fmt.Errorf("Failed to parse JSON data from %s%s", r.baseURL, datasourcePath)
 	}
 
 	return ds, err
