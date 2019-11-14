@@ -11,6 +11,7 @@ import (
 
 func TestWriteTo(t *testing.T) {
 	assert := assert.New(t)
+
 	datasources := []*grafana.DataSource{
 		&grafana.DataSource{
 			Name:           "test-db",
@@ -20,9 +21,11 @@ func TestWriteTo(t *testing.T) {
 			SecureJsonData: map[string]string{"password": "test"},
 		},
 	}
+
 	dsp := &grafana.DataSourceProvisioning{ApiVersion: 1, Datasources: datasources}
 	actual := new(bytes.Buffer)
 	dsp.WriteTo(actual)
 	expected, _ := ioutil.ReadFile("testdata/datasources.golden.yaml")
+
 	assert.Equal(string(expected), actual.String())
 }
