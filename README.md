@@ -21,7 +21,7 @@
     <img alt="Docker Automated build" src="https://img.shields.io/docker/cloud/automated/mrlioncub/hamara" />
   </a>
   <a href="https://hub.docker.com/r/mrlioncub/hamara">
-    <img alt="Docker Image Size" src="https://img.shields.io/docker/image-size/mrlioncub/wdmrc/hamara" />
+    <img alt="Docker Image Size" src="https://img.shields.io/docker/image-size/mrlioncub/hamara/latest" />
   </a>
 </p>
 
