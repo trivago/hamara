@@ -12,6 +12,8 @@
   <a href="https://goreportcard.com/report/github.com/trivago/hamara">
     <img alt="Report Card" src="https://goreportcard.com/badge/github.com/trivago/hamara?style=flat" />
   </a>
+</p>
+<p align="center">
   <a href="https://hub.docker.com/r/mrlioncub/hamara">
     <img alt="Build Status" src="https://img.shields.io/docker/cloud/build/mrlioncub/hamara" />
   </a>
