@@ -3,14 +3,24 @@
 </p>
 
 <p align="center">
-  [![Build Status](https://github.com/trivago/hamara/workflows/Go/badge.svg)](https://github.com/trivago/hamara/actions)
-  [![Codecov branch](https://img.shields.io/codecov/c/github/trivago/hamara/master?color=codecov&label=codecov&logo=codecov&logoColor=codecov)](https://codecov.io/gh/trivago/hamara)
-  [![Report Card](https://goreportcard.com/badge/github.com/trivago/hamara?style=flat)(https://goreportcard.com/report/github.com/trivago/hamara)
-</p>
-<p align="center">
-  [![Build Status](https://img.shields.io/docker/cloud/build/mrlioncub/hamara)](https://hub.docker.com/r/mrlioncub/hamara)
-  [![Docker Automated build](https://img.shields.io/docker/cloud/automated/mrlioncub/hamara)](https://hub.docker.com/r/mrlioncub/hamara)
-  [![Docker Image Size](https://img.shields.io/docker/image-size/mrlioncub/wdmrc/hamara)](https://hub.docker.com/r/mrlioncub/hamara)
+  <a href="https://github.com/trivago/hamara/actions">
+    <img alt="Build Status" src="https://github.com/trivago/hamara/workflows/Go/badge.svg" />
+  </a>
+  <a href="https://codecov.io/gh/trivago/hamara">
+    <img alt="Codecov branch" src="https://img.shields.io/codecov/c/github/trivago/hamara/master?color=codecov&label=codecov&logo=codecov&logoColor=codecov" />
+  </a>
+  <a href="https://goreportcard.com/report/github.com/trivago/hamara">
+    <img alt="Report Card" src="https://goreportcard.com/badge/github.com/trivago/hamara?style=flat" />
+  </a>
+  <a href="https://hub.docker.com/r/mrlioncub/hamara">
+    <img alt="Build Status" src="https://img.shields.io/docker/cloud/build/mrlioncub/hamara" />
+  </a>
+  <a href="https://hub.docker.com/r/mrlioncub/hamara">
+    <img alt="Docker Automated build" src="https://img.shields.io/docker/cloud/automated/mrlioncub/hamara" />
+  </a>
+  <a href="https://hub.docker.com/r/mrlioncub/hamara">
+    <img alt="Docker Image Size" src="https://img.shields.io/docker/image-size/mrlioncub/wdmrc/hamara" />
+  </a>
 </p>
 
 `hamara` is a tool to export datasources from the existing Grafana DB into a YAML provisioning file by utilizing the Grafana REST API.
