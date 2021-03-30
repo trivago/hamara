@@ -1,14 +1,16 @@
-# Build using golang:1.12 base image
-FROM golang:1.12 as base
-RUN mkdir /build
-ADD . /build/
-WORKDIR /build
-RUN go build -o hamara .
+FROM golang:1.15-alpine as build
+COPY . /src/
+WORKDIR /src
+RUN set -x \
+  && apk add --no-cache git \
+  && go build -o hamara .
 
-# Final image
 FROM alpine
-RUN adduser -S -D -H -h /app appuser
-USER appuser
-COPY --from=base /build/hamara /app/
 WORKDIR /app
-CMD ["./hamara"]
+COPY --from=build /src/hamara /app/
+RUN set -x \
+  && addgroup -g 5000 -S hamara \
+  && adduser -u 5000 -H -D -S -s /sbin/nologin -G hamara hamara
+USER hamara
+ENTRYPOINT ["/app/hamara"]
+CMD ["-h"]
