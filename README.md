@@ -14,14 +14,14 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://hub.docker.com/r/mrlioncub/hamara">
-    <img alt="Build Status" src="https://img.shields.io/docker/cloud/build/mrlioncub/hamara" />
+  <a href="https://hub.docker.com/r/trivago/hamara">
+    <img alt="Build Status" src="https://img.shields.io/docker/build/trivago/hamara" />
   </a>
-  <a href="https://hub.docker.com/r/mrlioncub/hamara">
-    <img alt="Docker Automated build" src="https://img.shields.io/docker/cloud/automated/mrlioncub/hamara" />
+  <a href="https://hub.docker.com/r/trivago/hamara">
+    <img alt="Docker Automated build" src="https://img.shields.io/docker/automated/trivago/hamara" />
   </a>
-  <a href="https://hub.docker.com/r/mrlioncub/hamara">
-    <img alt="Docker Image Size" src="https://img.shields.io/docker/image-size/mrlioncub/hamara/latest" />
+  <a href="https://hub.docker.com/r/tribago/hamara">
+    <img alt="Docker Image Size" src="https://img.shields.io/docker/image-size/trivago/hamara/latest" />
   </a>
 </p>
 
