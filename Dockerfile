@@ -1,4 +1,4 @@
-FROM golang:1.15-alpine as build
+FROM golang:1.12-alpine as build
 COPY . /src/
 WORKDIR /src
 RUN set -x \
