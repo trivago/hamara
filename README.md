@@ -13,6 +13,17 @@
     <img alt="Report Card" src="https://goreportcard.com/badge/github.com/trivago/hamara?style=flat" />
   </a>
 </p>
+<p align="center">
+  <a href="https://hub.docker.com/r/trivago/hamara">
+    <img alt="Build Status" src="https://img.shields.io/docker/build/trivago/hamara" />
+  </a>
+  <a href="https://hub.docker.com/r/trivago/hamara">
+    <img alt="Docker Automated build" src="https://img.shields.io/docker/automated/trivago/hamara" />
+  </a>
+  <a href="https://hub.docker.com/r/tribago/hamara">
+    <img alt="Docker Image Size" src="https://img.shields.io/docker/image-size/trivago/hamara/latest" />
+  </a>
+</p>
 
 `hamara` is a tool to export datasources from the existing Grafana DB into a YAML provisioning file by utilizing the Grafana REST API.
 
@@ -31,12 +42,26 @@ Flags:
   -k, --key string    API key with Admin rights from Grafana
 ```
 
+or using Docker:
+
+```bash
+docker run --rm trivago/hamara
+```
+
 **Example**
 ---
 
-```
+```bash
 export GRAFANA_API_KEY=<your API key here>
 hamara export --host=localhost:3000 --key=$GRAFANA_API_KEY > datasources.yaml
+cat datasources.yaml
+```
+
+or using Docker:
+
+```bash
+export GRAFANA_API_KEY=<your API key here>
+docker run --rm trivago/hamara export --host=localhost:3000 --key=$GRAFANA_API_KEY > datasources.yaml
 cat datasources.yaml
 ```
 
