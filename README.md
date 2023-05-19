@@ -57,11 +57,18 @@ hamara export --host=localhost:3000 --key=$GRAFANA_API_KEY > datasources.yaml
 cat datasources.yaml
 ```
 
-or using Docker:
+or using Docker (MacOS/Windows):
 
 ```bash
 export GRAFANA_API_KEY=<your API key here>
-docker run --rm trivago/hamara export --host=localhost:3000 --key=$GRAFANA_API_KEY > datasources.yaml
+docker run --rm trivago/hamara ./hamara export --host=host.docker.internal:3000 --key=$GRAFANA_API_KEY > datasources.yaml
+cat datasources.yaml
+```
+
+or using Docker (Linux):
+```bash
+export GRAFANA_API_KEY=<your API key here>
+docker run --add-host host.docker.internal:host-gateway --rm trivago/hamara ./hamara export --host=host.docker.internal:3000 --key=$GRAFANA_API_KEY > datasources.yaml
 cat datasources.yaml
 ```
 
